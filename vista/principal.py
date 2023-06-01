@@ -19,11 +19,17 @@ class Home:
         self.listaSubImagenes = []
         self.recorte_imagen()
         self.imagenElegida = self.listaSubImagenes[0][1]
+        self.imagenPantalla2 = self.listaSubImagenes[2][2]
+        self.imagenPantalla3 = self.listaSubImagenes[2][1]
         self.imagenAlerta = Image.open(RUTA_IMAGEN_ALERTA)
         self.imagenAlerta =  self.imagenAlerta.resize((50, 30))
         
         self.inicializa_screen()
 
+    def get_imagen_2(self):
+        return self.imagenPantalla2
+    def get_imagen_3(self):
+        return self.imagenPantalla3
     def on_close(self):
         print("Ejecuta close")
         self.window.destroy()
@@ -40,7 +46,7 @@ class Home:
         marcoA= tk.Frame(self.window,width=500,height=500)
         marcoA.configure(background="#B0D2E3")
         marcoA.pack()
-        tituloBienvenido = tk.Label(marcoA,text="CompuDoc\n\nTu médico en casa",font=("Arial", 20),bg="#B0D2E3")
+        tituloBienvenido = tk.Label(marcoA,text="CyberDoctor\n\nTu médico en casa",font=("Arial", 20),bg="#B0D2E3")
         self.figuraDoctor = ImageTk.PhotoImage(self.imagenElegida)
         labelImagen = tk.Label(marcoA,image=self.figuraDoctor,bg="#B0D2E3")
         tituloBienvenido.grid(row=0,column=0)

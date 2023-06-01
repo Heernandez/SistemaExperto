@@ -2,7 +2,7 @@ import tkinter as tk
 
 class VentanaEmergente:
     def __init__(self, parent, title, cuidados, recomendaciones):
-        self.window = tk.Toplevel(parent)
+        self.window = tk.Toplevel(parent,bg="#B0D2E3")
         self.window.title(title)
         
         frame = tk.Frame(self.window)
@@ -21,12 +21,10 @@ class VentanaEmergente:
         # Redimensionar la ventana en altura según el contenido
         self.window.geometry(f"400x{self.window.winfo_reqheight()+100}")
 
-
-
 class Resultado:
-    def __init__(self, parent, seleccionadas, enfermedades,cuidados,recomendaciones):
+    def __init__(self, parent, seleccionadas, enfermedades,cuidados,recomendaciones,imagen):
         self.parent = parent
-        self.window = tk.Toplevel(self.parent.root)
+        self.window = tk.Toplevel(self.parent.root,bg="#B0D2E3")
         self.window.protocol("WM_DELETE_WINDOW", self.on_close)
         self.window.title("Resultados")
         self.window.geometry("500x400")

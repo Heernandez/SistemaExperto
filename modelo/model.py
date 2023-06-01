@@ -1,5 +1,5 @@
 from pyswip import Prolog
-import os,sys
+import os
 
 # Obtiene la ruta absoluta del archivo base.pl
 RUTA_BASE_CONOCIMIENTO = os.path.abspath(os.path.join(os.path.dirname(__file__), 'base.pl'))
@@ -103,10 +103,11 @@ class SistemaExperto:
         return respuesta
 
 
-        
-print("Prueba")
-a = SistemaExperto()
-print(a.obtenerRecomendaciones("neumonia"))
-#print(a.obtenerCuidados("artritis"))
-#sintomas = a.obtenerSintomas()
-#a.preguntar_enfermedad_2()
+if __name__ == "__main__":
+    print("Pruebas unitarias")        
+    #print("Prueba")
+    #a = SistemaExperto()
+    #print(a.obtenerRecomendaciones("neumonia"))
+    #print(a.obtenerCuidados("artritis"))
+    #sintomas = a.obtenerSintomas()
+    #a.preguntar_enfermedad_2()

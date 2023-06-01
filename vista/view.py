@@ -58,7 +58,7 @@ class MainApplication:
             self.ventana3.window.withdraw()
         except:
             print("rompe 2")
-        self.ventana2 = Consulta(self,self.sisExp.obtenerSintomas())  # Crea una nueva instancia de Ventana2
+        self.ventana2 = Consulta(self,self.sisExp.obtenerSintomas(),imagen=self.ventana1.get_imagen_2())  # Crea una nueva instancia de Ventana2
         self.ventana2.window.deiconify()
 
     def show_ventana3(self,seleccion):
@@ -73,7 +73,7 @@ class MainApplication:
         enf = self.sisExp.preguntar_enfermedad(seleccion)
         cu  = self.sisExp.obtenerListaCuidados(enf)
         rec = self.sisExp.obtenerListaRecomendaciones(enf)
-        self.ventana3 = Resultado(self,seleccion,enfermedades=enf,cuidados=cu,recomendaciones=rec)  # Crea una nueva instancia de Ventana2
+        self.ventana3 = Resultado(self,seleccion,enfermedades=enf,cuidados=cu,recomendaciones=rec,imagen=self.ventana1.get_imagen_3())  # Crea una nueva instancia de Ventana2
         self.ventana3.window.deiconify()
         
 

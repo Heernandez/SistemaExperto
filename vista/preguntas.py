@@ -1,23 +1,29 @@
 import tkinter as tk
 import time
+from PIL import Image,ImageTk
 
 class Consulta:
-    def __init__(self, parent,sintomas):
+    def __init__(self, parent,sintomas,imagen):
+        self.imagen = imagen
         self.parent = parent
-        self.window = tk.Toplevel(parent.root)
+        self.window = tk.Toplevel(parent.root,bg="#B0D2E3")
+        
 
         self.window.protocol("WM_DELETE_WINDOW", self.on_close)
         self.opciones = sintomas
-        self.window.title("Doctor OnLine")
+        self.window.title("Preguntas de rutina.")
         self.window.geometry("500x400") # Fijar el tamaño de la ventana
-        self.labelTitle = tk.Label(self.window, text='En Consulta con tu Doctor Virtual', font=("Arial", 40), wraplength=400)
+        self.labelTitle = tk.Label(self.window, text='¿En los últimos días has sentido ...?', font=("Arial", 30), wraplength=400)
         self.labelTitle.pack(side='top', anchor='center')
     
         self.seleccionadas = []
 
         self.label = tk.Label(self.window, text=self.opciones[0], font=("Arial", 20))
         self.label.pack(pady=20)
-    
+        
+        self.figuraDoctor = ImageTk.PhotoImage(self.imagen)
+        self.labelImagen = tk.Label(self.window,image=self.figuraDoctor,bg="#B0D2E3")
+        self.labelImagen.pack()
         self.contenedorBotones = tk.Frame(self.window)
         #self.contenedorBotones.pack()
         tk.Button(self.contenedorBotones, text="Sí", command=self.seleccionar_opcion, font=("Arial", 10), height=2, width=5).grid(row=0,column=0)
