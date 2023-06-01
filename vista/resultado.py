@@ -1,5 +1,13 @@
 import tkinter as tk
 
+class VentanaEmergente:
+    def __init__(self, parent,title):
+        self.window = tk.Toplevel(parent)
+        self.window.title(title)
+        self.window.geometry("200x100")
+        self.label = tk.Label(self.window, text="¡Hola, soy una ventana emergente!")
+        self.label.pack(pady=20)
+
 class Resultado:
     def __init__(self, parent, seleccionadas, enfermedades):
         self.parent = parent
@@ -10,13 +18,29 @@ class Resultado:
 
         if seleccionadas:
             tk.Label(self.window, text="Para los síntomas referidos:", font=("Arial", 14)).pack(pady=20)
-            self.list_var = tk.StringVar(value=seleccionadas)
-            self.listbox = tk.Listbox(self.window, height=4)
-            self.listbox.pack(pady=10)
+            self.frame_seleccionadas = tk.Frame(self.window)
+            self.frame_seleccionadas.pack(pady=10)
+
+            # Crear un frame para contener la lista de síntomas seleccionados y la barra de desplazamiento
+            frame_scroll = tk.Frame(self.frame_seleccionadas)
+            frame_scroll.pack(side=tk.LEFT)
+
+            # Crear un scrollbar para la lista
+            scrollbar = tk.Scrollbar(frame_scroll)
+            scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+            # Crear el Listbox para los síntomas seleccionados
+            self.listbox_seleccionadas = tk.Listbox(frame_scroll, height=4, yscrollcommand=scrollbar.set)
+            self.listbox_seleccionadas.pack(side=tk.LEFT, fill=tk.BOTH)
+            scrollbar.config(command=self.listbox_seleccionadas.yview)
+
+            # Agregar las etiquetas a la lista de síntomas seleccionados
             for i, opcion in enumerate(seleccionadas):
-                self.listbox.insert(i+1, opcion.replace("_", " "))
+                self.listbox_seleccionadas.insert(i + 1, opcion.replace("_", " "))
+
         else:
             tk.Label(self.window, text="No referiste ningún síntoma", font=("Arial", 14)).pack(pady=20)
+
 
         if enfermedades:
             tk.Label(self.window, text="Se muestran las posibles enfermedades:", font=("Arial", 14)).pack(pady=20)
@@ -34,7 +58,8 @@ class Resultado:
                 columna = i % num_columnas
                 boton = tk.Button(self.frame_enfermedades, text=enfermedad.replace("_", " "))
                 boton.grid(row=fila, column=columna, padx=5, pady=5)
-                boton.bind("<Enter>", lambda event, enfermedad=enfermedad: self.mouse_pasa(event, enfermedad))            
+                boton.bind("<Enter>", lambda event, enfermedad=enfermedad: self.mostrar_ventana(event, enfermedad))
+                boton.bind("<Leave>", lambda event, enfermedad=enfermedad: self.cerrar_ventana(event, enfermedad))
         else:
             tk.Label(self.window, text="No se pudo determinar un diagnóstico.", font=("Arial", 14)).pack(pady=20)
 
@@ -45,10 +70,14 @@ class Resultado:
         self.parent.show_main_window("FALSE")
         self.window.destroy()
     
-    
-    def mouse_pasa(self,event, enfermedad):
-        print(f"El mouse está pasando por el botón {enfermedad}")
+    def mostrar_ventana(self, event,enfermedad):
+        titulo = f"Recomendaciones para {enfermedad}"
+        self.ventana_emergente = VentanaEmergente(self.window,titulo)
 
+    def cerrar_ventana(self, event,enfermedad):
+        if hasattr(self, 'ventana_emergente'):
+            self.ventana_emergente.window.destroy()
+            del self.ventana_emergente
 
     def hacer_algo(self,color):
         print(f"Se ha seleccionado el color {color}")
