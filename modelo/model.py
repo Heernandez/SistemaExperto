@@ -64,9 +64,49 @@ class SistemaExperto:
             print(a)
             break
         a.close()
+    
+    def obtenerCuidados(self,enfermedad):
+        cuidados = []
+        consultaProlog = f"cuidado({enfermedad},X)"
+        print(consultaProlog)
+        for cuidado in self.prolog.query(consultaProlog):
+            cuidados.append(cuidado["X"])
         
+        if len(cuidados)>0:
+            aux = [item.decode('utf-8') for item in cuidados[0]]
+            cuidados = aux
+        
+        return cuidados
 
-#a = SistemaExperto()
-#a.iniciarInferencia()
+    def obtenerRecomendaciones(self,enfermedad):
+        recomendaciones = []
+        consultaProlog = f"recomendacion({enfermedad},X)"
+        print(consultaProlog)       
+        for recomendacion in self.prolog.query(consultaProlog):
+            recomendaciones.append(recomendacion["X"])
+        if len(recomendaciones)>0:
+            aux = [item.decode('utf-8') for item in recomendaciones[0]]
+            recomendaciones = aux
+        
+        return recomendaciones
+
+    def obtenerListaCuidados(self,listaEnfermedades):
+        respuesta = {}
+        for i in listaEnfermedades:
+            respuesta[i] = self.obtenerCuidados(i)
+        return respuesta
+    
+    def obtenerListaRecomendaciones(self,listaEnfermedades):
+        respuesta = {}
+        for i in listaEnfermedades:
+            respuesta[i] = self.obtenerRecomendaciones(i)
+        return respuesta
+
+
+        
+print("Prueba")
+a = SistemaExperto()
+print(a.obtenerRecomendaciones("neumonia"))
+#print(a.obtenerCuidados("artritis"))
 #sintomas = a.obtenerSintomas()
 #a.preguntar_enfermedad_2()

@@ -69,7 +69,11 @@ class MainApplication:
             self.ventana2.window.withdraw()
         except:
             print("rompe 3")
-        self.ventana3 = Resultado(self,seleccion,self.sisExp.preguntar_enfermedad(seleccion))  # Crea una nueva instancia de Ventana2
+        
+        enf = self.sisExp.preguntar_enfermedad(seleccion)
+        cu  = self.sisExp.obtenerListaCuidados(enf)
+        rec = self.sisExp.obtenerListaRecomendaciones(enf)
+        self.ventana3 = Resultado(self,seleccion,enfermedades=enf,cuidados=cu,recomendaciones=rec)  # Crea una nueva instancia de Ventana2
         self.ventana3.window.deiconify()
         
 

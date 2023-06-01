@@ -26,8 +26,11 @@ class Consulta:
         self.contenedorBotones.pack(anchor=tk.CENTER)
 
     def seleccionar_opcion(self):
-        self.seleccionadas.append(self.opciones[0])
-        print(self.opciones[0])
+        try:
+            self.seleccionadas.append(self.opciones[0])
+            print(self.opciones[0])
+        except:
+            print("fallo el append")
         self.siguiente_opcion()
 
     def siguiente_opcion(self):

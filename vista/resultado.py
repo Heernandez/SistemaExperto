@@ -1,20 +1,37 @@
 import tkinter as tk
 
 class VentanaEmergente:
-    def __init__(self, parent,title):
+    def __init__(self, parent, title, cuidados, recomendaciones):
         self.window = tk.Toplevel(parent)
         self.window.title(title)
-        self.window.geometry("200x100")
-        self.label = tk.Label(self.window, text="¡Hola, soy una ventana emergente!")
-        self.label.pack(pady=20)
+        
+        frame = tk.Frame(self.window)
+        frame.pack(padx=10, pady=10)
+
+        # Parte de los cuidados
+        tk.Label(frame, text="Cuidados", font=("Arial", 14)).pack(pady=10)
+        cuidados_text = tk.Message(frame, text="\n".join(cuidados), width=300)
+        cuidados_text.pack(pady=5)
+
+        # Parte de las recomendaciones
+        tk.Label(frame, text="Recomendaciones", font=("Arial", 14)).pack(pady=10)
+        recomendaciones_text = tk.Message(frame, text="\n".join(recomendaciones), width=300)
+        recomendaciones_text.pack(pady=5)
+
+        # Redimensionar la ventana en altura según el contenido
+        self.window.geometry(f"400x{self.window.winfo_reqheight()+100}")
+
+
 
 class Resultado:
-    def __init__(self, parent, seleccionadas, enfermedades):
+    def __init__(self, parent, seleccionadas, enfermedades,cuidados,recomendaciones):
         self.parent = parent
         self.window = tk.Toplevel(self.parent.root)
         self.window.protocol("WM_DELETE_WINDOW", self.on_close)
         self.window.title("Resultados")
         self.window.geometry("500x400")
+        self.cu = cuidados
+        self.rec = recomendaciones
 
         if seleccionadas:
             tk.Label(self.window, text="Para los síntomas referidos:", font=("Arial", 14)).pack(pady=20)
@@ -56,10 +73,10 @@ class Resultado:
             for i, enfermedad in enumerate(enfermedades):
                 fila = i // num_columnas
                 columna = i % num_columnas
-                boton = tk.Button(self.frame_enfermedades, text=enfermedad.replace("_", " "))
+                boton = tk.Button(self.frame_enfermedades,command=lambda enfermedad=enfermedad: self.onclickBoton(enfermedad), text=enfermedad.replace("_", " "))
                 boton.grid(row=fila, column=columna, padx=5, pady=5)
-                boton.bind("<Enter>", lambda event, enfermedad=enfermedad: self.mostrar_ventana(event, enfermedad))
-                boton.bind("<Leave>", lambda event, enfermedad=enfermedad: self.cerrar_ventana(event, enfermedad))
+                #boton.bind("<Enter>", lambda event, enfermedad=enfermedad: self.mostrar_ventana(event, enfermedad))
+                #boton.bind("<Leave>", lambda event, enfermedad=enfermedad: self.cerrar_ventana(event, enfermedad))
         else:
             tk.Label(self.window, text="No se pudo determinar un diagnóstico.", font=("Arial", 14)).pack(pady=20)
 
@@ -71,8 +88,20 @@ class Resultado:
         self.window.destroy()
     
     def mostrar_ventana(self, event,enfermedad):
+        #cuidados = ["Descansar", "Tomar medicamentos", "Mantenerse hidratado"]
+        #recomendaciones = ["Evitar actividades extenuantes", "Seguir las indicaciones del médico"]
+        cuidados = self.cu[enfermedad]
+        recomendaciones = self.rec[enfermedad]
         titulo = f"Recomendaciones para {enfermedad}"
-        self.ventana_emergente = VentanaEmergente(self.window,titulo)
+        self.ventana_emergente = VentanaEmergente(self.window,titulo,cuidados,recomendaciones)
+    
+    def onclickBoton(self,enfermedad):
+        #cuidados = ["Descansar", "Tomar medicamentos", "Mantenerse hidratado","Dormir a buena hora","Descansar", "Tomar medicamentos", "Mantenerse hidratado","Dormir a buena hora"]
+        #recomendaciones = ["Evitar actividades extenuantes", "Seguir las indicaciones del médico","Tomar medicamento a la hora","Evitar actividades extenuantes", "Seguir las indicaciones del médico","Tomar medicamento a la hora"]
+        cuidados = self.cu[enfermedad]
+        recomendaciones = self.rec[enfermedad]
+        titulo = f"Recomendaciones para {enfermedad}"
+        self.ventana_emergente = VentanaEmergente(self.window,titulo,cuidados,recomendaciones)
 
     def cerrar_ventana(self, event,enfermedad):
         if hasattr(self, 'ventana_emergente'):
