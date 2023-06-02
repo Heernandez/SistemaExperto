@@ -1,5 +1,5 @@
 :- encoding(utf8).
-% Hechos
+% Hechos - definicion de sintomas
 sintoma(fiebre).
 sintoma(tos).
 sintoma(dolor_de_pecho).
@@ -33,7 +33,7 @@ sintoma(rigidez_articular).
 sintoma(hinchazon_articular).
 sintoma(debilidad_muscular).
 
-% hechos - enfermedades  
+%hechos - enfermedades con sus sintomas 
 enfermedad(gripa,               [fiebre, tos]). 
 enfermedad(neumonia,            [fiebre, tos, dolor_de_pecho, dificultad_respiratoria, fatiga, dolor_de_cabeza]).
 enfermedad(alergia,             [picazon_en_los_ojos, estornudos, secrecion_nasal, congestion_nasal, ronchas_en_la_piel]).
@@ -46,6 +46,8 @@ enfermedad(anemia,              [fatiga, debilidad, palidez, dolor_de_cabeza, fa
 enfermedad(insuficiencia_renal, [fatiga, perdida_de_apetito, nauseas, vomitos, picazon_en_la_piel]).
 enfermedad(artritis,            [dolor_articular, rigidez_articular, hinchazon_articular, debilidad_muscular]).
 
+% hechos - cuidados para cada enfermedad
+cuidado(gripa, ["Descansar en cama", "Beber líquidos calientes", "Tomar analgésicos"]).
 cuidado(neumonia,            ["Descansar en cama", "Tomar medicamentos recetados", "Beber líquidos calientes"]).
 cuidado(alergia,             ["Evitar alérgenos conocidos", "Usar medicamentos antihistamínicos", "Mantener un ambiente limpio"]).
 cuidado(sinusitis,           ["Aplicar compresas calientes", "Utilizar descongestionantes nasales", "Beber abundante agua"]).
@@ -57,6 +59,9 @@ cuidado(anemia,              ["Consumir alimentos ricos en hierro", "Tomar suple
 cuidado(insuficiencia_renal, ["Seguir una dieta baja en sodio", "Tomar medicamentos según prescripción", "Controlar la presión arterial"]).
 cuidado(artritis,            ["Hacer ejercicio de bajo impacto", "Aplicar compresas calientes o frías", "Tomar medicamentos antiinflamatorios"]).
 
+% hechos - recomendaciones para cada enfermedad
+
+recomendacion(gripa,               ["Consultar a un médico", "Evitar el contacto con otras personas", "Cubrirse la boca al toser o estornudar"]).
 recomendacion(neumonia,            ["Consultar a un médico", "Realizar radiografías de tórax", "Tomar antibióticos recetados"]).
 recomendacion(alergia,             ["Evitar alérgenos conocidos", "Usar antihistamínicos de venta libre", "Consultar a un alergólogo"]).
 recomendacion(sinusitis,           ["Consultar a un médico", "Tomar medicamentos para descongestionar", "Realizar lavados nasales con solución salina"]).
@@ -66,10 +71,11 @@ recomendacion(asma,                ["Consultar a un neumólogo", "Utilizar inhal
 recomendacion(gastritis,           ["Consultar a un gastroenterólogo", "Evitar alimentos irritantes", "Tomar medicamentos para reducir la acidez"]).
 recomendacion(anemia,              ["Consultar a un médico", "Realizar análisis de sangre para determinar la causa", "Tomar suplementos de hierro o vitaminas"]).
 recomendacion(insuficiencia_renal, ["Consultar a un nefrólogo", "Seguir una dieta baja en proteínas", "Realizar diálisis o trasplante renal si es necesario"]).
-recomendacion(artritis,            ["Realizar ejercicios de bajo impacto", "Aplicar compresas calientes o frías en las articulaciones", "Tomar medicamentos antiinflamatorios", "Consultar a un reumatólogo"])
+recomendacion(artritis,            ["Realizar ejercicios de bajo impacto", "Aplicar compresas calientes o frías en las articulaciones", "Tomar medicamentos antiinflamatorios", "Consultar a un reumatólogo"]).
 
 
 tiene_mitad_mas_1_elementos_comunes(Lista1, Lista2) :-
+    write("Ingreso "),write(Lista1),write(" sintomas"),write(Lista2),nl,
     num_elementos_comunes(Lista1, Lista2, NumComunes),
     length(Lista1, LongLista1),
     %write("Ingreso "),write(LongLista1),write(" sintomas"),nl,
@@ -84,6 +90,7 @@ num_elementos_comunes([], _, 0).
 num_elementos_comunes([H1|T1], L2, N) :-
     member(H1, L2),
     num_elementos_comunes(T1, L2, N1),
+    write("N es :"),write(N1),
     N is N1 + 1.
 %regla base cuando no es miembro
 num_elementos_comunes([H1|T1], L2, N) :-

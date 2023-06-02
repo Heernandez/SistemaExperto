@@ -26,6 +26,7 @@ class SistemaExperto:
     def preguntar_enfermedad(self,sintomas):
         # Busca una posible enfermedad que coincida con los síntomas
         consultaProlog = f"enfermedades_coincidentes({sintomas},EnfermedadesF)."
+        print(consultaProlog)
         for enfermedad in self.prolog.query(consultaProlog):
             resultadoA = enfermedad['EnfermedadesF']
             resultadoB = []
@@ -115,7 +116,7 @@ if __name__ == "__main__":
     print("Pruebas unitarias")        
     #print("Prueba")
     a = SistemaExperto()
-    a.iniciarInferencia()
+    a.preguntar_enfermedad(['fiebre','tos'])
     #print(a.obtenerRecomendaciones("neumonia"))
     #print(a.obtenerCuidados("artritis"))
     #sintomas = a.obtenerSintomas()
