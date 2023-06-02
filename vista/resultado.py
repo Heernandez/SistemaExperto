@@ -1,5 +1,5 @@
 import tkinter as tk
-
+from PIL import Image,ImageTk
 class VentanaEmergente:
     def __init__(self, parent, title, cuidados, recomendaciones):
         self.window = tk.Toplevel(parent,bg="#B0D2E3")
@@ -22,8 +22,10 @@ class VentanaEmergente:
         self.window.geometry(f"400x{self.window.winfo_reqheight()+100}")
 
 class Resultado:
-    def __init__(self, parent, seleccionadas, enfermedades,cuidados,recomendaciones,imagen):
-        
+    def __init__(self, parent, seleccionadas, enfermedades,cuidados,recomendaciones,imagen,imagen2,imagen3):
+        self.imagen = imagen
+        self.imagen2 = imagen2
+        self.imagen3 = imagen3
         self.parent = parent
         self.window = tk.Toplevel(self.parent.root,bg="#B0D2E3")
         self.window.protocol("WM_DELETE_WINDOW", self.on_close)
@@ -58,12 +60,23 @@ class Resultado:
         else:
             tk.Label(self.window, text="No referiste ningún síntoma", font=("Arial", 14)).pack(pady=20)
 
-
         if enfermedades:
             tk.Label(self.window, text="Se muestran las posibles enfermedades:", font=("Arial", 14)).pack(pady=20)
-            self.frame_enfermedades = tk.Frame(self.window,bg="#B0D2E3")
-            self.frame_enfermedades.pack(pady=10)
             
+            # Contenedor principal
+            self.contenedor_principal = tk.Frame(self.window,bg="#B0D2E3")
+            self.contenedor_principal.pack()
+
+            self.frame_imagen = tk.Frame(self.contenedor_principal)
+            self.frame_imagen.grid(row=0, column=0, padx=10, pady=10)
+
+            self.figuraDoctor = ImageTk.PhotoImage(self.imagen)
+            self.labelImagen = tk.Label(self.frame_imagen,image=self.figuraDoctor,bg="#B0D2E3")
+            self.labelImagen.pack()
+
+
+            self.frame_enfermedades = tk.Frame(self.contenedor_principal,bg="#B0D2E3")
+            self.frame_enfermedades.grid(row=0, column=1, padx=10, pady=10)
             # Calcular el número de filas y columnas para los botones
             num_enfermedades = len(enfermedades)
             num_filas = (num_enfermedades + 2) // 3
@@ -78,7 +91,16 @@ class Resultado:
                 #boton.bind("<Enter>", lambda event, enfermedad=enfermedad: self.mostrar_ventana(event, enfermedad))
                 #boton.bind("<Leave>", lambda event, enfermedad=enfermedad: self.cerrar_ventana(event, enfermedad))
         else:
-            tk.Label(self.window, text="No se pudo determinar un diagnóstico.", font=("Arial", 14)).pack(pady=20)
+            if seleccionadas:
+                tk.Label(self.window, text="No se pudo determinar un diagnóstico.", font=("Arial", 14)).pack(pady=20)
+                self.figuraDoctor = ImageTk.PhotoImage(self.imagen3)
+                self.labelImagen = tk.Label(self.window,image=self.figuraDoctor,bg="#B0D2E3")
+                self.labelImagen.pack()
+            else:
+                #tk.Label(self.window, text="No se pudo determinar un diagnóstico.", font=("Arial", 14)).pack(pady=20)
+                self.figuraDoctor = ImageTk.PhotoImage(self.imagen2)
+                self.labelImagen = tk.Label(self.window,image=self.figuraDoctor,bg="#B0D2E3")
+                self.labelImagen.pack()
 
         tk.Button(self.window, text="Cerrar", command=self.on_close).pack(pady=20)
 

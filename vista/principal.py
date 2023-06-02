@@ -21,6 +21,8 @@ class Home:
         self.imagenElegida = self.listaSubImagenes[0][1]
         self.imagenPantalla2 = self.listaSubImagenes[2][2]
         self.imagenPantalla3 = self.listaSubImagenes[2][1]
+        self.imagenPantalla4 = self.listaSubImagenes[2][2]
+        self.imagenPantalla5 = self.listaSubImagenes[1][2]
         self.imagenAlerta = Image.open(RUTA_IMAGEN_ALERTA)
         self.imagenAlerta =  self.imagenAlerta.resize((50, 30))
         
@@ -30,6 +32,10 @@ class Home:
         return self.imagenPantalla2
     def get_imagen_3(self):
         return self.imagenPantalla3
+    def get_imagen_4(self):
+        return self.imagenPantalla4
+    def get_imagen_5(self):
+        return self.imagenPantalla5
     def on_close(self):
         print("Ejecuta close")
         self.window.destroy()
