@@ -1,5 +1,5 @@
 from pyswip import Prolog
-import os,sys
+import os
 
 # Obtiene la ruta absoluta del archivo base.pl
 RUTA_BASE_CONOCIMIENTO = os.path.abspath(os.path.join(os.path.dirname(__file__), 'base.pl'))
@@ -26,6 +26,7 @@ class SistemaExperto:
     def preguntar_enfermedad(self,sintomas):
         # Busca una posible enfermedad que coincida con los síntomas
         consultaProlog = f"enfermedades_coincidentes({sintomas},EnfermedadesF)."
+        print(consultaProlog)
         for enfermedad in self.prolog.query(consultaProlog):
             resultadoA = enfermedad['EnfermedadesF']
             resultadoB = []
@@ -64,9 +65,59 @@ class SistemaExperto:
             print(a)
             break
         a.close()
+    
+    def obtenerCuidados(self,enfermedad):
+        cuidados = []
+        consultaProlog = f"cuidado({enfermedad},X)"
+        print(consultaProlog)
+        for cuidado in self.prolog.query(consultaProlog):
+            cuidados.append(cuidado["X"])
         
+        if len(cuidados)>0:
+            aux = [item.decode('utf-8') for item in cuidados[0]]
+            cuidados = aux
+        
+        return cuidados
 
-#a = SistemaExperto()
-#a.iniciarInferencia()
-#sintomas = a.obtenerSintomas()
-#a.preguntar_enfermedad_2()
+    def obtenerRecomendaciones(self,enfermedad):
+        recomendaciones = []
+        consultaProlog = f"recomendacion({enfermedad},X)"
+        print(consultaProlog)       
+        for recomendacion in self.prolog.query(consultaProlog):
+            recomendaciones.append(recomendacion["X"])
+        if len(recomendaciones)>0:
+            aux = [item.decode('utf-8') for item in recomendaciones[0]]
+            recomendaciones = aux
+        
+        return recomendaciones
+
+    def obtenerListaCuidados(self,listaEnfermedades):
+        respuesta = {}
+        for i in listaEnfermedades:
+            lista = self.obtenerCuidados(i)
+            if len(lista) == 0:
+                respuesta[i] = ["Consultar a un médico"]
+            else:
+                respuesta[i] = lista
+        return respuesta
+    
+    def obtenerListaRecomendaciones(self,listaEnfermedades):
+        respuesta = {}
+        for i in listaEnfermedades:
+            lista = self.obtenerRecomendaciones(i)
+            if len(lista) == 0:
+                respuesta[i] = ["Consultar a un médico"]
+            else:
+                respuesta[i] = lista
+        return respuesta
+
+
+if __name__ == "__main__":
+    print("Pruebas unitarias")        
+    #print("Prueba")
+    a = SistemaExperto()
+    a.preguntar_enfermedad(['fiebre','tos'])
+    #print(a.obtenerRecomendaciones("neumonia"))
+    #print(a.obtenerCuidados("artritis"))
+    #sintomas = a.obtenerSintomas()
+    #a.preguntar_enfermedad_2()

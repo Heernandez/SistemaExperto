@@ -19,11 +19,23 @@ class Home:
         self.listaSubImagenes = []
         self.recorte_imagen()
         self.imagenElegida = self.listaSubImagenes[0][1]
+        self.imagenPantalla2 = self.listaSubImagenes[2][2]
+        self.imagenPantalla3 = self.listaSubImagenes[2][1]
+        self.imagenPantalla4 = self.listaSubImagenes[2][2]
+        self.imagenPantalla5 = self.listaSubImagenes[1][2]
         self.imagenAlerta = Image.open(RUTA_IMAGEN_ALERTA)
         self.imagenAlerta =  self.imagenAlerta.resize((50, 30))
         
         self.inicializa_screen()
 
+    def get_imagen_2(self):
+        return self.imagenPantalla2
+    def get_imagen_3(self):
+        return self.imagenPantalla3
+    def get_imagen_4(self):
+        return self.imagenPantalla4
+    def get_imagen_5(self):
+        return self.imagenPantalla5
     def on_close(self):
         print("Ejecuta close")
         self.window.destroy()
@@ -40,7 +52,7 @@ class Home:
         marcoA= tk.Frame(self.window,width=500,height=500)
         marcoA.configure(background="#B0D2E3")
         marcoA.pack()
-        tituloBienvenido = tk.Label(marcoA,text="CompuDoc\n\nTu médico en casa",font=("Arial", 20),bg="#B0D2E3")
+        tituloBienvenido = tk.Label(marcoA,text="CyberDoctor\n\nTu médico en casa",font=("Arial", 20),bg="#B0D2E3")
         self.figuraDoctor = ImageTk.PhotoImage(self.imagenElegida)
         labelImagen = tk.Label(marcoA,image=self.figuraDoctor,bg="#B0D2E3")
         tituloBienvenido.grid(row=0,column=0)
@@ -59,7 +71,7 @@ class Home:
 
         labelDescripcion = tk.Label(marcoB,text=textoDescriptivo,font=("Arial", 11), bg="white",wraplength=350,image=self.imagenAlerta, compound=tk.LEFT)
         boton = tk.Button(marcoB, text="Continuar",font=("Arial", 11), relief="flat",overrelief="raised",state="disabled", command=partial(self.accionBoton))
-        checkAceptarCondiciones = tk.Checkbutton(marcoB, text="Acepto los términos y condiciones",font=("Arial", 11), bg="white", command=partial(self.accionCheckButton,estatusCheck,boton),variable=estatusCheck)
+        checkAceptarCondiciones = tk.Checkbutton(marcoB, text="Acepto los términos y condiciones",font=("Arial", 11, "underline"), bg="white", command=partial(self.accionCheckButton,estatusCheck,boton),variable=estatusCheck)
         labelDescripcion.pack()
         checkAceptarCondiciones.pack()
         boton.pack()
