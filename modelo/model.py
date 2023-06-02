@@ -114,7 +114,8 @@ class SistemaExperto:
 if __name__ == "__main__":
     print("Pruebas unitarias")        
     #print("Prueba")
-    #a = SistemaExperto()
+    a = SistemaExperto()
+    a.iniciarInferencia()
     #print(a.obtenerRecomendaciones("neumonia"))
     #print(a.obtenerCuidados("artritis"))
     #sintomas = a.obtenerSintomas()

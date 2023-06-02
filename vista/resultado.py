@@ -61,7 +61,7 @@ class Resultado:
             tk.Label(self.window, text="No referiste ningún síntoma", font=("Arial", 14)).pack(pady=20)
 
         if enfermedades:
-            tk.Label(self.window, text="Se muestran las posibles enfermedades:", font=("Arial", 14)).pack(pady=20)
+            tk.Label(self.window, text="Se muestran las posibles enfermedades", font=("Arial", 14)).pack(pady=20)
             
             # Contenedor principal
             self.contenedor_principal = tk.Frame(self.window,bg="#B0D2E3")

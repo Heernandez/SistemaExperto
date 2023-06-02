@@ -33,42 +33,42 @@ sintoma(rigidez_articular).
 sintoma(hinchazon_articular).
 sintoma(debilidad_muscular).
 
-% hechos - enfermedades
-enfermedad(neumonia, [fiebre, tos, dolor_de_pecho, dificultad_respiratoria, fatiga, dolor_de_cabeza]).
-enfermedad(alergia, [picazon_en_los_ojos, estornudos, secrecion_nasal, congestion_nasal, ronchas_en_la_piel]).
-enfermedad(sinusitis, [dolor_de_cabeza, congestion_nasal, secrecion_nasal, dolor_de_garganta]).
-enfermedad(migraña,[dolor_de_cabeza, nauseas, vomitos, sensibilidad_a_la_luz, sensibilidad_al_ruido]).
-enfermedad(diabetes, [sed_excesiva, miccion_frecuente, hambre_excesiva, perdida_de_peso]).
-enfermedad(asma, [tos, dificultad_respiratoria, sibilancias, opresion_en_el_pecho]).
-enfermedad(gastritis, [dolor_abdominal, acidez_estomacal, nauseas, vomitos]).
-enfermedad(anemia, [fatiga, debilidad, palidez, dolor_de_cabeza, falta_de_aire]).
+% hechos - enfermedades  
+enfermedad(gripa,               [fiebre, tos]). 
+enfermedad(neumonia,            [fiebre, tos, dolor_de_pecho, dificultad_respiratoria, fatiga, dolor_de_cabeza]).
+enfermedad(alergia,             [picazon_en_los_ojos, estornudos, secrecion_nasal, congestion_nasal, ronchas_en_la_piel]).
+enfermedad(sinusitis,           [dolor_de_cabeza, congestion_nasal, secrecion_nasal, dolor_de_garganta]).
+enfermedad(migraña,             [dolor_de_cabeza, nauseas, vomitos, sensibilidad_a_la_luz, sensibilidad_al_ruido]).
+enfermedad(diabetes,            [sed_excesiva, miccion_frecuente, hambre_excesiva, perdida_de_peso]).
+enfermedad(asma,                [tos, dificultad_respiratoria, sibilancias, opresion_en_el_pecho]).
+enfermedad(gastritis,           [dolor_abdominal, acidez_estomacal, nauseas, vomitos]).
+enfermedad(anemia,              [fatiga, debilidad, palidez, dolor_de_cabeza, falta_de_aire]).
 enfermedad(insuficiencia_renal, [fatiga, perdida_de_apetito, nauseas, vomitos, picazon_en_la_piel]).
-enfermedad(artritis, [dolor_articular, rigidez_articular, hinchazon_articular, debilidad_muscular]).
+enfermedad(artritis,            [dolor_articular, rigidez_articular, hinchazon_articular, debilidad_muscular]).
 
-cuidado(neumonia, ["Descansar en cama", "Tomar medicamentos recetados", "Beber líquidos calientes"]).
-cuidado(alergia, ["Evitar alérgenos conocidos", "Usar medicamentos antihistamínicos", "Mantener un ambiente limpio"]).
-cuidado(sinusitis, ["Aplicar compresas calientes", "Utilizar descongestionantes nasales", "Beber abundante agua"]).
-cuidado(migraña, ["Descansar en un lugar oscuro y silencioso", "Aplicar compresas frías en la frente", "Tomar analgésicos"]).
-cuidado(diabetes, ["Controlar los niveles de azúcar en sangre", "Seguir una dieta balanceada", "Realizar ejercicio regularmente"]).
-cuidado(asma, ["Evitar desencadenantes de los ataques", "Usar inhaladores de rescate", "Seguir el plan de tratamiento"]).
-cuidado(gastritis, ["Evitar alimentos irritantes", "Tomar antiácidos", "Comer comidas pequeñas y frecuentes"]).
-cuidado(anemia, ["Consumir alimentos ricos en hierro", "Tomar suplementos de hierro", "Realizar actividad física moderada"]).
-%cuidado(insuficiencia_renal, ["Seguir una dieta baja en sodio", "Tomar medicamentos según prescripción", "Controlar la presión arterial"]).
-cuidado(artritis, ["Hacer ejercicio de bajo impacto", "Aplicar compresas calientes o frías", "Tomar medicamentos antiinflamatorios"]).
+cuidado(neumonia,            ["Descansar en cama", "Tomar medicamentos recetados", "Beber líquidos calientes"]).
+cuidado(alergia,             ["Evitar alérgenos conocidos", "Usar medicamentos antihistamínicos", "Mantener un ambiente limpio"]).
+cuidado(sinusitis,           ["Aplicar compresas calientes", "Utilizar descongestionantes nasales", "Beber abundante agua"]).
+cuidado(migraña,             ["Descansar en un lugar oscuro y silencioso", "Aplicar compresas frías en la frente", "Tomar analgésicos"]).
+cuidado(diabetes,            ["Controlar los niveles de azúcar en sangre", "Seguir una dieta balanceada", "Realizar ejercicio regularmente"]).
+cuidado(asma,                ["Evitar desencadenantes de los ataques", "Usar inhaladores de rescate", "Seguir el plan de tratamiento"]).
+cuidado(gastritis,           ["Evitar alimentos irritantes", "Tomar antiácidos", "Comer comidas pequeñas y frecuentes"]).
+cuidado(anemia,              ["Consumir alimentos ricos en hierro", "Tomar suplementos de hierro", "Realizar actividad física moderada"]).
+cuidado(insuficiencia_renal, ["Seguir una dieta baja en sodio", "Tomar medicamentos según prescripción", "Controlar la presión arterial"]).
+cuidado(artritis,            ["Hacer ejercicio de bajo impacto", "Aplicar compresas calientes o frías", "Tomar medicamentos antiinflamatorios"]).
 
-recomendacion(neumonia, ["Consultar a un médico", "Realizar radiografías de tórax", "Tomar antibióticos recetados"]).
-recomendacion(alergia, ["Evitar alérgenos conocidos", "Usar antihistamínicos de venta libre", "Consultar a un alergólogo"]).
-recomendacion(sinusitis, ["Consultar a un médico", "Tomar medicamentos para descongestionar", "Realizar lavados nasales con solución salina"]).
-recomendacion(migraña, ["Consultar a un médico", "Tomar analgésicos recetados", "Identificar y evitar los desencadenantes"]).
-recomendacion(diabetes, ["Consultar a un endocrinólogo", "Controlar los niveles de azúcar en sangre", "Seguir una dieta y un plan de ejercicio"]).
-recomendacion(asma, ["Consultar a un neumólogo", "Utilizar inhaladores de mantenimiento", "Realizar pruebas de función pulmonar"]).
-recomendacion(gastritis, ["Consultar a un gastroenterólogo", "Evitar alimentos irritantes", "Tomar medicamentos para reducir la acidez"]).
-recomendacion(anemia, ["Consultar a un médico", "Realizar análisis de sangre para determinar la causa", "Tomar suplementos de hierro o vitaminas"]).
+recomendacion(neumonia,            ["Consultar a un médico", "Realizar radiografías de tórax", "Tomar antibióticos recetados"]).
+recomendacion(alergia,             ["Evitar alérgenos conocidos", "Usar antihistamínicos de venta libre", "Consultar a un alergólogo"]).
+recomendacion(sinusitis,           ["Consultar a un médico", "Tomar medicamentos para descongestionar", "Realizar lavados nasales con solución salina"]).
+recomendacion(migraña,             ["Consultar a un médico", "Tomar analgésicos recetados", "Identificar y evitar los desencadenantes"]).
+recomendacion(diabetes,            ["Consultar a un endocrinólogo", "Controlar los niveles de azúcar en sangre", "Seguir una dieta y un plan de ejercicio"]).
+recomendacion(asma,                ["Consultar a un neumólogo", "Utilizar inhaladores de mantenimiento", "Realizar pruebas de función pulmonar"]).
+recomendacion(gastritis,           ["Consultar a un gastroenterólogo", "Evitar alimentos irritantes", "Tomar medicamentos para reducir la acidez"]).
+recomendacion(anemia,              ["Consultar a un médico", "Realizar análisis de sangre para determinar la causa", "Tomar suplementos de hierro o vitaminas"]).
 recomendacion(insuficiencia_renal, ["Consultar a un nefrólogo", "Seguir una dieta baja en proteínas", "Realizar diálisis o trasplante renal si es necesario"]).
-%recomendacion(artritis, ["Realizar ejercicios de bajo impacto", "Aplicar compresas calientes o frías en las articulaciones", "Tomar medicamentos antiinflamatorios", "Consultar a un reumatólogo"])
+recomendacion(artritis,            ["Realizar ejercicios de bajo impacto", "Aplicar compresas calientes o frías en las articulaciones", "Tomar medicamentos antiinflamatorios", "Consultar a un reumatólogo"])
 
 
-    
 tiene_mitad_mas_1_elementos_comunes(Lista1, Lista2) :-
     num_elementos_comunes(Lista1, Lista2, NumComunes),
     length(Lista1, LongLista1),
@@ -91,9 +91,9 @@ num_elementos_comunes([H1|T1], L2, N) :-
     num_elementos_comunes(T1, L2, N).
 
 enfermedad_sintomas(Sintomas,Enfermedad ) :-
-    %write("aca"),
+    write("aca"),
     enfermedad(Enfermedad, ListaSintomas),
-    %write("Comparando "), write(Sintomas), write(" con "), write(ListaSintomas), nl,
+    write("Comparando "), write(Sintomas), write(" con "), write(ListaSintomas), nl,
     tiene_mitad_mas_1_elementos_comunes(Sintomas,ListaSintomas).
 
 enfermedades_coincidentes(Sintomas, Enfermedades) :-
