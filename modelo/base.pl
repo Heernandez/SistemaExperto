@@ -73,11 +73,10 @@ recomendacion(anemia,              ["Consultar a un médico", "Realizar análisi
 recomendacion(insuficiencia_renal, ["Consultar a un nefrólogo", "Seguir una dieta baja en proteínas", "Realizar diálisis o trasplante renal si es necesario"]).
 recomendacion(artritis,            ["Realizar ejercicios de bajo impacto", "Aplicar compresas calientes o frías en las articulaciones", "Tomar medicamentos antiinflamatorios", "Consultar a un reumatólogo"]).
 
-
 tiene_mitad_mas_1_elementos_comunes(Lista1, Lista2) :-
-    write("Ingreso "),write(Lista1),write(" sintomas"),write(Lista2),nl,
+    %write("Ingreso "),write(Lista1),write(" sintomas"),write(Lista2),nl,
     num_elementos_comunes(Lista1, Lista2, NumComunes),
-    length(Lista1, LongLista1),
+    %%length(Lista1, LongLista1),
     %write("Ingreso "),write(LongLista1),write(" sintomas"),nl,
     length(Lista2, LongLista2),
     %write("Enfermedad a evaluar tiene "),write(LongLista2),write(" sintomas"),nl,
@@ -90,7 +89,7 @@ num_elementos_comunes([], _, 0).
 num_elementos_comunes([H1|T1], L2, N) :-
     member(H1, L2),
     num_elementos_comunes(T1, L2, N1),
-    write("N es :"),write(N1),
+    %write("N es :"),write(N1),
     N is N1 + 1.
 %regla base cuando no es miembro
 num_elementos_comunes([H1|T1], L2, N) :-
@@ -98,14 +97,14 @@ num_elementos_comunes([H1|T1], L2, N) :-
     num_elementos_comunes(T1, L2, N).
 
 enfermedad_sintomas(Sintomas,Enfermedad ) :-
-    write("aca"),
+    %write("aca"),
     enfermedad(Enfermedad, ListaSintomas),
-    write("Comparando "), write(Sintomas), write(" con "), write(ListaSintomas), nl,
+    %write("Comparando "), write(Sintomas), write(" con "), write(ListaSintomas), nl,
     tiene_mitad_mas_1_elementos_comunes(Sintomas,ListaSintomas).
 
 enfermedades_coincidentes(Sintomas, Enfermedades) :-
-    findall(Enfermedad, enfermedad_sintomas(Sintomas,Enfermedad ), Enfermedades),
-    write("e:"),write(Enfermedades).
+    findall(Enfermedad, enfermedad_sintomas(Sintomas,Enfermedad ), Enfermedades).
+    %write("e:"),write(Enfermedades).
 
 pregunta([], Lista, Lista).
 pregunta([Item|Resto], ListaActual, ListaFinal):-
@@ -122,10 +121,12 @@ contar_elementos([], 0).
 contar_elementos([_|T], N) :- contar_elementos(T, N1), N is N1 + 1.
 
 iniciar_inferencia:-
-    write("Bienvenido al sistema experto de diagnóstico de enfermedades."), nl,
-    write("Por favor, responda las siguientes preguntas con s/n."), nl,
+    %write("Bienvenido al sistema experto de diagnóstico de enfermedades."), nl,
+    %write("Por favor, responda las siguientes preguntas con s/n."), nl,
     findall(S, sintoma(S), Sintomas),
-    pregunta(Sintomas, [], Lista),write("Eligio:"),write(Lista),nl,
+    pregunta(Sintomas, [], Lista),
+    %write("Eligio:"),write(Lista),nl,
     enfermedades_coincidentes(Lista,EnfermedadesF),
-    write("Final: "),nl,write(EnfermedadesF),nl.
+    write("Final: "),nl,write(EnfermedadesF),
+    nl.
 

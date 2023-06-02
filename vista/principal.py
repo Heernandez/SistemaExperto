@@ -37,7 +37,7 @@ class Home:
     def get_imagen_5(self):
         return self.imagenPantalla5
     def on_close(self):
-        print("Ejecuta close")
+        #print("Ejecuta close")
         self.window.destroy()
         self.parent.root.destroy()
 
@@ -77,7 +77,7 @@ class Home:
         boton.pack()
 
     def accionBoton(self):
-        print("Accion continuar")
+        #print("Accion continuar")
         self.parent.show_main_window("SIGUIENTE1")
         self.window.destroy()
 
@@ -98,7 +98,7 @@ class Home:
             
             filaSubImagenes = []
             for x in range(0, self.imagenInicial.width, anchoSubImagen):
-                print(x,",",y)
+                #print(x,",",y)
                 subimagen = self.imagenInicial.crop((x, y, x + anchoSubImagen, y + altoSubImagen))
                 filaSubImagenes.append(subimagen)
             self.listaSubImagenes.append(filaSubImagenes)

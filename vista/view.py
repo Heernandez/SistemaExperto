@@ -2,11 +2,14 @@ import tkinter as tk
 from .principal import Home
 from .preguntas import Consulta
 from .resultado import Resultado
+import os
+RUTA_IMAGEN_ICO = (os.path.abspath(os.path.join(os.path.dirname(__file__), 'principal.ico'))).replace("\\", "\\\\")
 
 
 class MainApplication:
     def __init__(self,sisExp):
         self.root = tk.Tk()
+        self.root.iconbitmap(RUTA_IMAGEN_ICO)
         self.root.geometry("400x300")  # Ajusta el tamaño de la ventana principal
         self.root.title("Ventanas")
         self.main_window = tk.Frame(self.root)
@@ -24,7 +27,7 @@ class MainApplication:
         
 
     def show_main_window(self,accion="FALSO",seleccion=[]):
-        print("Se ejecuta principal : {}".format(accion))
+        #print("Se ejecuta principal : {}".format(accion))
         if(accion =="FALSO"):
             self.show_ventana1()
             
@@ -32,7 +35,7 @@ class MainApplication:
             self.show_ventana2()
 
         elif(accion == "SIGUIENTE2"):
-            print("respondió todo")
+            #print("respondió todo")
             self.show_ventana3(seleccion)
         else:
             self.show_ventana1()
@@ -40,35 +43,38 @@ class MainApplication:
 
 
     def show_ventana1(self):
-        print("Se ejecuta ventana 1")
+        ##print("Se ejecuta ventana 1")
         try:
             self.main_window.pack_forget()
             self.ventana2.window.withdraw()
             self.ventana3.window.withdraw()
         except:
-            print("rompe 1")
+            #print("rompe 1")
+            pass
         self.ventana1 = Home(self)  # Crea una nueva instancia de Ventana2
         self.ventana1.window.deiconify()
 
     def show_ventana2(self):
-        print("Se ejecuta ventana 2")
+        #print("Se ejecuta ventana 2")
         try:
             self.main_window.pack_forget()
             self.ventana1.window.withdraw()
             self.ventana3.window.withdraw()
         except:
-            print("rompe 2")
+            #print("rompe 2")
+            pass
         self.ventana2 = Consulta(self,self.sisExp.obtenerSintomas(),imagen=self.ventana1.get_imagen_2())  # Crea una nueva instancia de Ventana2
         self.ventana2.window.deiconify()
 
     def show_ventana3(self,seleccion):
-        print("Se ejecuta ventana 3")
+        #print("Se ejecuta ventana 3")
         try:
             self.main_window.pack_forget()
             self.ventana1.window.withdraw()
             self.ventana2.window.withdraw()
         except:
-            print("rompe 3")
+            #print("rompe 3")
+            pass
         
         enf = self.sisExp.preguntar_enfermedad(seleccion)
         cu  = self.sisExp.obtenerListaCuidados(enf)

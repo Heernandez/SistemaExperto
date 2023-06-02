@@ -26,4 +26,7 @@ boton2.grid(row=0, column=1)
 boton3 = tk.Button(frame_botones, text="Botón 3")
 boton3.grid(row=1, column=0)
 
+# Configurar el contenedor principal para que la columna 1 se expanda más que la columna 0
+contenedor_principal.columnconfigure(1, weight=1)
+
 ventana.mainloop()

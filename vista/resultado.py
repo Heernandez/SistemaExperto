@@ -33,7 +33,7 @@ class Resultado:
         self.window.geometry("500x400")
         self.cu = cuidados
         self.rec = recomendaciones
-        print(enfermedades)
+        #print(enfermedades)
 
         if seleccionadas:
             tk.Label(self.window, text="Para los síntomas referidos:", font=("Arial", 14)).pack(pady=20)
@@ -90,6 +90,8 @@ class Resultado:
                 boton.grid(row=fila, column=columna, padx=5, pady=5)
                 #boton.bind("<Enter>", lambda event, enfermedad=enfermedad: self.mostrar_ventana(event, enfermedad))
                 #boton.bind("<Leave>", lambda event, enfermedad=enfermedad: self.cerrar_ventana(event, enfermedad))
+            
+            self.contenedor_principal.columnconfigure(1, weight=1)
         else:
             if seleccionadas:
                 tk.Label(self.window, text="No se pudo determinar un diagnóstico.", font=("Arial", 14)).pack(pady=20)
@@ -105,7 +107,7 @@ class Resultado:
         tk.Button(self.window, text="Cerrar", command=self.on_close).pack(pady=20)
 
     def on_close(self):
-        print("Ejecuta close")
+        #print("Ejecuta close")
         self.parent.show_main_window("FALSE")
         self.window.destroy()
     

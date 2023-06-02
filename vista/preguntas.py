@@ -41,7 +41,7 @@ class Consulta:
         else:
             self.botonSi.config(state=tk.DISABLED)
             self.botonNo.config(state=tk.DISABLED)
-            print(f"Lista vacia  len:{len(self.opciones)}  data {self.opciones} ")
+            #print(f"Lista vacia  len:{len(self.opciones)}  data {self.opciones} ")
         self.siguiente_opcion()
         
 
@@ -54,7 +54,7 @@ class Consulta:
         else:
             self.botonSi.config(state=tk.DISABLED)
             self.botonNo.config(state=tk.DISABLED)
-            print(f"No pudo partir mas la lista. len:{len(self.opciones)}  data {self.opciones} ")
+            #print(f"No pudo partir mas la lista. len:{len(self.opciones)}  data {self.opciones} ")
             self.label.configure(text="Procesando...")
             time.sleep(3) # Esperar 5 segundos
             self.parent.show_main_window("SIGUIENTE2",self.seleccionadas)
@@ -63,7 +63,7 @@ class Consulta:
         #self.window.update()
     
     def on_close(self):
-        print("Ejecuta close")
+        #print("Ejecuta close")
         self.window.destroy()
         self.parent.show_main_window("FALSO")
         

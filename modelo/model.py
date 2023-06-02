@@ -26,13 +26,13 @@ class SistemaExperto:
     def preguntar_enfermedad(self,sintomas):
         # Busca una posible enfermedad que coincida con los síntomas
         consultaProlog = f"enfermedades_coincidentes({sintomas},EnfermedadesF)."
-        print(consultaProlog)
+        #print(consultaProlog)
         for enfermedad in self.prolog.query(consultaProlog):
             resultadoA = enfermedad['EnfermedadesF']
             resultadoB = []
             for i in resultadoA:
                 resultadoB.append(str(i.value))
-            print(resultadoB)
+            #print(resultadoB)
             return resultadoB
         return None
     
@@ -49,7 +49,7 @@ class SistemaExperto:
             resultadoB = []
             for i in resultadoA:
                 resultadoB.append(str(i.value))
-            print(resultadoB)
+            #print(resultadoB)
             return resultadoB
         return None
 
@@ -69,7 +69,7 @@ class SistemaExperto:
     def obtenerCuidados(self,enfermedad):
         cuidados = []
         consultaProlog = f"cuidado({enfermedad},X)"
-        print(consultaProlog)
+        #print(consultaProlog)
         for cuidado in self.prolog.query(consultaProlog):
             cuidados.append(cuidado["X"])
         
@@ -82,7 +82,7 @@ class SistemaExperto:
     def obtenerRecomendaciones(self,enfermedad):
         recomendaciones = []
         consultaProlog = f"recomendacion({enfermedad},X)"
-        print(consultaProlog)       
+        #print(consultaProlog)       
         for recomendacion in self.prolog.query(consultaProlog):
             recomendaciones.append(recomendacion["X"])
         if len(recomendaciones)>0:
