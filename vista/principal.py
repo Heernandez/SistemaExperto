@@ -65,7 +65,7 @@ class Home:
 
         labelDescripcion = tk.Label(marcoB,text=textoDescriptivo,font=("Arial", 11), bg="white",wraplength=350,image=self.imagenAlerta, compound=tk.LEFT)
         boton = tk.Button(marcoB, text="Continuar",font=("Arial", 11), relief="flat",overrelief="raised",state="disabled", command=partial(self.accionBoton))
-        checkAceptarCondiciones = tk.Checkbutton(marcoB, text="Acepto los términos y condiciones",font=("Arial", 11), bg="white", command=partial(self.accionCheckButton,estatusCheck,boton),variable=estatusCheck)
+        checkAceptarCondiciones = tk.Checkbutton(marcoB, text="Acepto los términos y condiciones",font=("Arial", 11, "underline"), bg="white", command=partial(self.accionCheckButton,estatusCheck,boton),variable=estatusCheck)
         labelDescripcion.pack()
         checkAceptarCondiciones.pack()
         boton.pack()

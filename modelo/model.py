@@ -93,13 +93,21 @@ class SistemaExperto:
     def obtenerListaCuidados(self,listaEnfermedades):
         respuesta = {}
         for i in listaEnfermedades:
-            respuesta[i] = self.obtenerCuidados(i)
+            lista = self.obtenerCuidados(i)
+            if len(lista) == 0:
+                respuesta[i] = ["Consultar a un médico"]
+            else:
+                respuesta[i] = lista
         return respuesta
     
     def obtenerListaRecomendaciones(self,listaEnfermedades):
         respuesta = {}
         for i in listaEnfermedades:
-            respuesta[i] = self.obtenerRecomendaciones(i)
+            lista = self.obtenerRecomendaciones(i)
+            if len(lista) == 0:
+                respuesta[i] = ["Consultar a un médico"]
+            else:
+                respuesta[i] = lista
         return respuesta
 
 

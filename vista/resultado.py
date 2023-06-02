@@ -23,6 +23,7 @@ class VentanaEmergente:
 
 class Resultado:
     def __init__(self, parent, seleccionadas, enfermedades,cuidados,recomendaciones,imagen):
+        
         self.parent = parent
         self.window = tk.Toplevel(self.parent.root,bg="#B0D2E3")
         self.window.protocol("WM_DELETE_WINDOW", self.on_close)
@@ -30,6 +31,7 @@ class Resultado:
         self.window.geometry("500x400")
         self.cu = cuidados
         self.rec = recomendaciones
+        print(enfermedades)
 
         if seleccionadas:
             tk.Label(self.window, text="Para los síntomas referidos:", font=("Arial", 14)).pack(pady=20)
@@ -59,7 +61,7 @@ class Resultado:
 
         if enfermedades:
             tk.Label(self.window, text="Se muestran las posibles enfermedades:", font=("Arial", 14)).pack(pady=20)
-            self.frame_enfermedades = tk.Frame(self.window)
+            self.frame_enfermedades = tk.Frame(self.window,bg="#B0D2E3")
             self.frame_enfermedades.pack(pady=10)
             
             # Calcular el número de filas y columnas para los botones

@@ -1,6 +1,7 @@
 import tkinter as tk
 import time
 from PIL import Image,ImageTk
+from functools import partial
 
 class Consulta:
     def __init__(self, parent,sintomas,imagen):
@@ -25,28 +26,37 @@ class Consulta:
         self.labelImagen = tk.Label(self.window,image=self.figuraDoctor,bg="#B0D2E3")
         self.labelImagen.pack()
         self.contenedorBotones = tk.Frame(self.window)
-        #self.contenedorBotones.pack()
-        tk.Button(self.contenedorBotones, text="Sí", command=self.seleccionar_opcion, font=("Arial", 10), height=2, width=5).grid(row=0,column=0)
-        tk.Button(self.contenedorBotones, text="No", command=self.siguiente_opcion, font=("Arial", 10), height=2, width=5).grid(row=0,column=1)
-        # Centrar el contenedor en la pantalla
         self.contenedorBotones.pack(anchor=tk.CENTER)
+        self.botonSi = tk.Button(self.contenedorBotones, text="Sí", command=partial(self.seleccionar_opcion), font=("Arial", 10), height=2, width=5)
+        self.botonNo = tk.Button(self.contenedorBotones, text="No", command=partial(self.siguiente_opcion), font=("Arial", 10), height=2, width=5)
+        self.botonSi.grid(row=0,column=0)
+        self.botonNo.grid(row=0,column=1)
+        # Centrar el contenedor en la pantalla
+        #self.contenedorBotones.pack(anchor=tk.CENTER)
 
     def seleccionar_opcion(self):
-        try:
-            self.seleccionadas.append(self.opciones[0])
-            print(self.opciones[0])
-        except:
-            print("fallo el append")
+        if(len(self.opciones) > 0):
+            elegido = self.opciones[0]
+            self.seleccionadas.append(elegido)
+        else:
+            self.botonSi.config(state=tk.DISABLED)
+            self.botonNo.config(state=tk.DISABLED)
+            print(f"Lista vacia  len:{len(self.opciones)}  data {self.opciones} ")
         self.siguiente_opcion()
+        
 
     def siguiente_opcion(self):
+        #print(self.opciones, len(self.opciones))
         self.opciones = self.opciones[1:]
-        if self.opciones:
+        if(len(self.opciones) > 0):
             self.label.configure(text=self.opciones[0].replace("_"," "))
-            self.window.update()
+            self.window.update()  
         else:
+            self.botonSi.config(state=tk.DISABLED)
+            self.botonNo.config(state=tk.DISABLED)
+            print(f"No pudo partir mas la lista. len:{len(self.opciones)}  data {self.opciones} ")
             self.label.configure(text="Procesando...")
-            time.sleep(1) # Esperar 5 segundos
+            time.sleep(3) # Esperar 5 segundos
             self.parent.show_main_window("SIGUIENTE2",self.seleccionadas)
             
             self.window.destroy()

@@ -53,7 +53,7 @@ cuidado(diabetes, ["Controlar los niveles de azúcar en sangre", "Seguir una die
 cuidado(asma, ["Evitar desencadenantes de los ataques", "Usar inhaladores de rescate", "Seguir el plan de tratamiento"]).
 cuidado(gastritis, ["Evitar alimentos irritantes", "Tomar antiácidos", "Comer comidas pequeñas y frecuentes"]).
 cuidado(anemia, ["Consumir alimentos ricos en hierro", "Tomar suplementos de hierro", "Realizar actividad física moderada"]).
-cuidado(insuficiencia_renal, ["Seguir una dieta baja en sodio", "Tomar medicamentos según prescripción", "Controlar la presión arterial"]).
+%cuidado(insuficiencia_renal, ["Seguir una dieta baja en sodio", "Tomar medicamentos según prescripción", "Controlar la presión arterial"]).
 cuidado(artritis, ["Hacer ejercicio de bajo impacto", "Aplicar compresas calientes o frías", "Tomar medicamentos antiinflamatorios"]).
 
 recomendacion(neumonia, ["Consultar a un médico", "Realizar radiografías de tórax", "Tomar antibióticos recetados"]).
@@ -65,6 +65,7 @@ recomendacion(asma, ["Consultar a un neumólogo", "Utilizar inhaladores de mante
 recomendacion(gastritis, ["Consultar a un gastroenterólogo", "Evitar alimentos irritantes", "Tomar medicamentos para reducir la acidez"]).
 recomendacion(anemia, ["Consultar a un médico", "Realizar análisis de sangre para determinar la causa", "Tomar suplementos de hierro o vitaminas"]).
 recomendacion(insuficiencia_renal, ["Consultar a un nefrólogo", "Seguir una dieta baja en proteínas", "Realizar diálisis o trasplante renal si es necesario"]).
+%recomendacion(artritis, ["Realizar ejercicios de bajo impacto", "Aplicar compresas calientes o frías en las articulaciones", "Tomar medicamentos antiinflamatorios", "Consultar a un reumatólogo"])
 
 
     
